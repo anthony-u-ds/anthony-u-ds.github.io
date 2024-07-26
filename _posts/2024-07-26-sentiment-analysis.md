@@ -59,7 +59,7 @@ Also, removing punctuation and special characters can help normalize the text da
 
 As I tune my model in the future, I may include punctuation and emojis to improve the analysis of the sentiment being conveyed.
 
-![](sentiment_media/180d568fc553aeec6d3f065c498c0f43.png)
+![Testing Alt](sentiment_media/180d568fc553aeec6d3f065c498c0f43.png)
 
 *d213task2_trim['reviewText_lower_words_only'] = d213task2_trim['reviewText_lower_words_only'].str.replace('\\W', ' ', regex=True) \# replace non word characters*
 
