@@ -9,6 +9,8 @@ tags: [Python, Neural Network Models, AI, Natural Language Processing]
 
 **Part I: Research Question.**
 
+*(Please note that this was one the many projects that I did as part of my Masters in Data Analytics program. So, you will see this reflected in the naming of variables "d213task2" etc. I have also performed similar tasks for clients and some of my previous employers, but the proprietary nature of such work means that I am unable to share information from those projects)*
+
 For a company to retain its customers and keep them happy, it must be able to quickly analyze feedback from its customers and address any legitimate issues and concerns in a prompt manner.
 
 **A1.**
