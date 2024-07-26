@@ -65,7 +65,7 @@ As I tune my model in the future, I may include punctuation and emojis to improv
 
 *d213task2_trim['reviewText_lower_words_only'] = d213task2_trim['reviewText_lower_words_only'].str.replace("[0-9]", ' ', regex=True) \# replace all digits*
 
-![](sentiment_media/bfb18b56d44c6fac6742a4376f0a88b1.png)
+![](/img/posts/bfb18b56d44c6fac6742a4376f0a88b1.png)
 
 *Vocabulary size*
 
