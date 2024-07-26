@@ -1,3 +1,10 @@
+---
+layout: post
+title: Sentiment Analysis of Customer Reviews
+image: "/posts/sentiment_analysis.png"
+tags: [Python, Neural Network Models, AI, Natural Language Processing]
+---
+
 **Sentiment Analysis**
 
 **Part I: Research Question.**
@@ -52,13 +59,13 @@ Also, removing punctuation and special characters can help normalize the text da
 
 As I tune my model in the future, I may include punctuation and emojis to improve the analysis of the sentiment being conveyed.
 
-![](media/180d568fc553aeec6d3f065c498c0f43.png)
+![](sentiment_media/180d568fc553aeec6d3f065c498c0f43.png)
 
 *d213task2_trim['reviewText_lower_words_only'] = d213task2_trim['reviewText_lower_words_only'].str.replace('\\W', ' ', regex=True) \# replace non word characters*
 
 *d213task2_trim['reviewText_lower_words_only'] = d213task2_trim['reviewText_lower_words_only'].str.replace("[0-9]", ' ', regex=True) \# replace all digits*
 
-![](media/bfb18b56d44c6fac6742a4376f0a88b1.png)
+![](sentiment_media/bfb18b56d44c6fac6742a4376f0a88b1.png)
 
 *Vocabulary size*
 
@@ -66,7 +73,7 @@ Tokenization is the process of breaking a sentence/phrase to individual words/ch
 
 After removing stop words from our text and breaking down the sentences into individual words through word tokenization, we are ready to count the number of unique words to determine the vocabulary size using this code:
 
-![](media/56fdd260f67c16045bdc3c93e0072691.png)
+![](sentiment_media/56fdd260f67c16045bdc3c93e0072691.png)
 
 The result is:
 
@@ -88,7 +95,7 @@ When building our models, we are at liberty to set the embedding dimensions as w
 
 The reviews we are analyzing are of different sizes and sentence length. After tokenization, each sentence will need to be padded, so that each sentence is of the same size and can fit the matrix. Therefore, it makes sense to pick the longest sentence or sequence as my maximum sequence length. That way I am not truncating any sentence. The code to determine the maximum sequence (sentence) length is:
 
-![](media/d704f90a0b69add9813e9fecdb3573a4.png)
+![](sentiment_media/d704f90a0b69add9813e9fecdb3573a4.png)
 
 And this is the result:
 
@@ -104,11 +111,11 @@ So, based on these statistics I will be using 60 as my maximum sequence (sentenc
 
 Tokenization is the process of breaking down the text into smaller sizes or tokens. We have done this a couple of times already, when we performed word tokenization to determine the vocabulary size as well as sentence tokenization for the max sequence length. That code again:
 
-![](media/56fdd260f67c16045bdc3c93e0072691.png)
+![](sentiment_media/56fdd260f67c16045bdc3c93e0072691.png)
 
 And for the sentence tokenization:
 
-![](media/70d623824afb85de6ee71ad62f0d26da.png)
+![](sentiment_media/70d623824afb85de6ee71ad62f0d26da.png)
 
 Please note that for sentence tokenization, I used *“from gensim.summarization.textcleaner import split_sentences”* not nltk and you need to pip install gensim==3.8.3 The default v 4x doesn’t work as intended and is not supported.
 
@@ -118,11 +125,11 @@ I selected this sentence tokenization module because I like the way it handles p
 
 When we are encoding our numeric sequence representations of the text data, our sentences lengths will not be uniform. This is why we will need to select a maximum length for sentences and pad unused sentence positions in shorter sentences with a padding character, typically ‘0’. In our case, our maximum sentence length (maxlen) will be determined by searching all our reviews sentences for the one that has the most tokens. This will be our maximum length, so that we don’t truncate any sentences. Screenshots of the code as well as the first row, raw text, encoded text, and then padded encoded text follow:
 
-![](media/dbe7273f4f7575eeafb24b4665bea645.png)
+![](sentiment_media/dbe7273f4f7575eeafb24b4665bea645.png)
 
 From the image below, you can see that the first review is 29 words while a maxlen of 434 means there was at least one review that 434 words. One tensor could end up having a few words (tokens), while in this case, the largest tensor would have 434 words. Without padding, the shapes of the tensors would vary widely and would make it difficult to process in the neural network. Padding is the process of adding extra empty tokens to so that the tensors have the same dimensions. In this case, we pad with the number 0 at the end of the existing tokens. So, if I sentence initially has only 34 words, we will add 400 zeros to give it the same dimensions as the largest review which already had 434 words. The different tensors can now be accurately compared to each other since they are the same length after padding. This type of padding is called “post padding”, since I add the zeros at the end of the existing tokens, rather than as a prefix in the beginning.
 
-![](media/f5298d9404246ad220fa3c14fc1ef642.png)
+![](sentiment_media/f5298d9404246ad220fa3c14fc1ef642.png)
 
 **B4.**
 
@@ -139,15 +146,15 @@ I use the Sigmoid function because I want to categorize each sentiment as either
 
 This is the mathematical representation:
 
-![](media/e32f399183207fc61e11274cf535560f.png)
+![](sentiment_media/e32f399183207fc61e11274cf535560f.png)
 
-![](media/639b758b762cb6ad2495c360e412328c.png)
+![](sentiment_media/639b758b762cb6ad2495c360e412328c.png)
 
 **B5.**
 
 I am using data from the Amazon Product Data set for my analysis. The current link in the WGU website, takes you to a page that redirects you, but the final link is here [https://cseweb.ucsd.edu/\~jmcauley/datasets/amazon_v2/](https://cseweb.ucsd.edu/~jmcauley/datasets/amazon_v2/)
 
-![](media/968bbb47ebfc55182f50cc8c1c4ce72a.png)
+![](sentiment_media/968bbb47ebfc55182f50cc8c1c4ce72a.png)
 
 I download and unzip the .gz zip file.
 
@@ -180,7 +187,7 @@ Export test and train data to accompanying files.
 
 I can describe my model using the model.summary() function. This is the result:
 
-![](media/c10a63bfc5ab74454dbe1031a4ab1d17.png)
+![](sentiment_media/c10a63bfc5ab74454dbe1031a4ab1d17.png)
 
 **C2.**
 
@@ -240,13 +247,13 @@ Note that for my model, I set the number of epochs to 20. But I also set stoppin
 
 Without stopping criteria, my model would have run 20 times, and I would manually verify the training output to determine the best validation score. BUt with the patience set to ‘2’, if there isn’t any improvement in the accuracy after 2 runs, it stops the runs. In my case it stopped afte 3 runs. See screenshot below:
 
-![](media/dacd247c7ee94b8516dcda81fbc1583c.png)
+![](sentiment_media/dacd247c7ee94b8516dcda81fbc1583c.png)
 
 **D2.**
 
-![](media/ccf0bba3bbb4155a87bbb8438bd5aba5.png)
+![](sentiment_media/ccf0bba3bbb4155a87bbb8438bd5aba5.png)
 
-![](media/12d322a775b23140fdeecd4e72fe657f.png)
+![](sentiment_media/12d322a775b23140fdeecd4e72fe657f.png)
 
 **D3.**
 
@@ -268,9 +275,9 @@ Which translates to: Test loss: 11% / Test accuracy: 96%
 
 For even more validation, I run my model on sentiments that I generate myself. In the code, I provide an example of what would be objectively considered a positive review, as well as a negative review. The model performs as expected on this my user generated text. Below is a screenshot of the negative followed by the positive review
 
-![](media/f01b6a945bde7358e32a68c4657cdc24.png)
+![](sentiment_media/f01b6a945bde7358e32a68c4657cdc24.png)
 
-![](media/06edee96789739cccd17c067a6d47948.png)
+![](sentiment_media/06edee96789739cccd17c067a6d47948.png)
 
 **Part V: Summary and Recommendations**
 
