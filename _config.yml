@@ -23,7 +23,7 @@ avatar_image: /img/profile_picture.JPG
 #-------------------------------
 # Contact links
 linkedln: "https://www.linkedin.com/in/anthony-ukpong-94a8aa291/" # Add your linkedln handle
-github: "https://github.com/anthony-u-ds/anthony-u-ds.github.io"  # Add your github handle
+github: "https://anthony-u-ds.github.io"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
